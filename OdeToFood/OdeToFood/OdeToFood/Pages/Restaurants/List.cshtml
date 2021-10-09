@@ -1,19 +1,51 @@
 ﻿@page
 @model OdeToFood.Pages.Restaurants.ListModel
 @{
+    ViewData["Title"] = "Restaurants";
 }
 
 <h1>Restaurants</h1>
 
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <!-- When using asp-for tag, you are already in the 'Model', so you don't need it like you do for the foreach below. Works like two way binding. -->
+            <input type="search" class="form-control" asp-for="SearchTerm" name="searchTerm" />
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <button class="btn btn-light">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </span>
+            </div>
+            @*<span class="input- input-group-btn">
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>*@
+        </div>
+    </div>
+</form>
+
 <table class="table">
-    @foreach(var restaurant in Model.Restaurants)
-            {
-                <tr>
-                    <td>@restaurant.Name</td>
-                    <td>@restaurant.Location</td>
-                    <td>@restaurant.Cuisine</td>
-                </tr>
-            }
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Location</td>
+            <td>@restaurant.Cuisine</td>
+            <td>
+                @*This would work, but going to use tag helpers instead.*@
+                @*Tag helpers are best because they know about the software and what pages are in place, together with their inputs*@
+                @*href="/Restaurants/Detail?restaurantId=@restaurant.Id">*@
+                <a class="btn btn-lg"
+                   asp-page="./Detail"
+                   asp-route-restaurantId="@restaurant.Id">
+                    <i class="fa fa-search-plus"></i>
+                </a>
+            </td>
+        </tr>
+    }
 </table>
 
 <div>@Model.Message</div>
