@@ -1,0 +1,34 @@
+﻿@page "{restaurantId:int?}"
+@model OdeToFood.Pages.Restaurants.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editing @Model.Restaurant.Name</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Restaurant.Id"/>
+    <div class="form-group">
+        <label asp-for="Restaurant.Name"></label>
+        <input asp-for="Restaurant.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Location"></label>
+        <input asp-for="Restaurant.Location" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Location"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Cuisine"></label>
+        @*Supposed to be able to get the list of cuisine types like this, but not done in course. Also, it doesn't recognise CuisineType. Better to build in code.*@
+        @*<select class="form-control" asp-for="Restaurant.Cuisine"
+                                     asp-items="Html.GetEnumSelectList<CuisineType>()">*@
+        @*Note that asp-for is always working with the model, so doesn't need Model., whereas asp-items does. asp-for also makes it select the right entry in the list*@
+        <select class="form-control" asp-for="Restaurant.Cuisine"
+            asp-items="Model.Cuisines"></select>
+        <span class="text-danger" asp-validation-for="Restaurant.Cuisine"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -9,6 +9,19 @@
     page is smart enough to add restaurant. on the front of Id *@
 @*@page "{id?:int}"*@
 
+
+@*Could use this to check the contents of TempData*@
+@*@if(TempData.ContainsKey("Message"))
+    {
+        <div>@TempData["Message"]</div>
+    }*@
+
+@*To use the binding method...*@
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
 <h2>@Model.Restaurant.Name</h2>
 
 <div>
@@ -22,4 +35,5 @@
     Cuisine: @Model.Restaurant.Cuisine
 </div>
 
-<a asp-page="./List" class="btn btn-outline-light">All Restaurants</a>
+
+<a asp-pa ge="./List" class="btn btn-primary">All Restaurants</a>

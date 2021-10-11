@@ -10,6 +10,10 @@ namespace OdeToFood.Pages.Restaurants
         private readonly IRestaurantData _restaurantData;
 
         public Restaurant Restaurant { get; set; }
+        
+        // Use this attribute to bind to a property in TempData
+        [TempData]
+        public string Message { get; set; }
 
         public DetailModel(IRestaurantData restaurantData)
         {

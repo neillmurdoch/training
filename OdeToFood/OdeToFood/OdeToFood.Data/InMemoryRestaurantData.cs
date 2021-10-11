@@ -18,11 +18,6 @@ namespace OdeToFood.Data
             };
         }
 
-        public Restaurant GetById(int id)
-        {
-            return _restaurants.SingleOrDefault(r => r.Id == id);
-        }
-
         public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
             //return restaurants.OrderBy(r => r.Name);
@@ -33,6 +28,36 @@ namespace OdeToFood.Data
                    select r;
 
             return restaurants;
+        }
+
+        public Restaurant Add(Restaurant newRestaurant)
+        {
+            _restaurants.Add(newRestaurant);
+            newRestaurant.Id = _restaurants.Max(r => r.Id) + 1;
+
+            return newRestaurant;
+        }
+
+        public Restaurant Update(Restaurant updatedRestaurant)
+        {
+            var restaurant = _restaurants.SingleOrDefault(r => r.Id == updatedRestaurant.Id);
+            if (restaurant != null)
+            {
+                restaurant.Name = updatedRestaurant.Name;
+                restaurant.Location = updatedRestaurant.Location;
+                restaurant.Cuisine = updatedRestaurant.Cuisine;
+            }
+            return restaurant;
+        }
+
+        public int Commit()
+        {
+            return 0;
+        }
+
+        public Restaurant GetById(int id)
+        {
+            return _restaurants.SingleOrDefault(r => r.Id == id);
         }
     }
 }
