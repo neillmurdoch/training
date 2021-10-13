@@ -59,5 +59,17 @@ namespace OdeToFood.Data
         {
             return _restaurants.SingleOrDefault(r => r.Id == id);
         }
+
+        public Restaurant Delete(int id)
+        {
+            var restaurant = _restaurants.FirstOrDefault(r => r.Id == id);
+
+            if (restaurant != null)
+            {
+                _restaurants.Remove(restaurant);
+            }
+
+            return restaurant;
+        }
     }
 }
