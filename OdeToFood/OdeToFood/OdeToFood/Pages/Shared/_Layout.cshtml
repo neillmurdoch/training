@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @* This is a dynamic data structure that anything can be placed in. It can be seen by all pages, views, etc. *@
     <title>@ViewData["Title"] - OdeToFood</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -36,11 +37,19 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @*This says where all the pages are actually placed on this page*@
             @RenderBody()
         </main>
+        <hr />
     </div>
 
     <footer class="border-top footer text-muted">
+        @* Note kebab case for name. You can pass parameters by adding parameter to Invoke method and setting it here, by name  *@
+        @*<vc:restaurant-count zipcode="aaa"></vc:restaurant-count>*@
+        <vc:restaurant-count></vc:restaurant-count>
+
+        @*Anything on the pages that is wrapped in an @section block will render into this section*@
+        @RenderSection("footer", required: false)
         <div class="container">
             &copy; 2021 - OdeToFood - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
